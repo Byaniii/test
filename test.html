@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tab/Focus Detection Test</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+    #status { font-size: 1.5em; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Tab / Focus Test</h1>
+  <p id="status">Waiting for activity...</p>
+
+  <script>
+    const status = document.getElementById("status");
+
+    // Detect tab visibility changes
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") {
+        status.textContent = "✅ Tab is active (visible)";
+      } else {
+        status.textContent = "❌ Tab is inactive (hidden or minimized)";
+      }
+    });
+
+    // Detect window focus/blur
+    window.addEventListener("blur", () => {
+      status.textContent = "❌ Window lost focus (Alt+Tab or clicked away)";
+    });
+
+    window.addEventListener("focus", () => {
+      status.textContent = "✅ Window focused (you returned)";
+    });
+  </script>
+</body>
+</html>
